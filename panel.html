@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Omni Testnet Grid</title><link rel="stylesheet" href="panel.css"><script src="panel.js" defer></script></head>
+<body>
+<header><h1>Omni Grid</h1><span>TESTNET</span></header>
+<main>
+<section aria-label="Состояние">
+  <p id="status" role="status">Загрузка…</p>
+  <p class="metric" id="volume">0 USDC</p>
+  <progress id="progress" max="100" value="0" aria-label="Исполненный оборот"></progress>
+  <p id="detail"></p>
+  <div class="actions"><button id="stop">Пауза и отмена</button><button id="resume">Возобновить</button><button id="close">Закрыть позицию</button><button id="reset" class="quiet">Сбросить журнал</button></div>
+</section>
+<details id="connection">
+  <summary>Подключение API</summary>
+  <form id="connect">
+    <label>Публичный ключ<input name="publicKey" required spellcheck="false" autocomplete="off"></label>
+    <label>Приватный API-ключ Ed25519<input name="seed" type="password" required autocomplete="off"></label>
+    <button>Проверить и подключить</button>
+  </form>
+  <p>Используйте ключ Omni Testnet с правом Trade. Ключ действует в расширении до закрытия браузера.</p>
+  <div class="actions"><button id="account">Счёт</button><button id="positions">Позиции</button><button id="orders">Заявки</button><button id="fills">Исполнения</button></div>
+  <pre id="result" hidden></pre>
+</details>
+<details id="setup" open>
+  <summary>Новый запуск</summary>
+  <form id="start">
+    <label>Режим<select name="strategy"><option value="grid">Лимитная сетка</option><option value="stress">Стресс-тест рыночными циклами</option></select></label>
+    <div class="fields">
+      <label>Инструмент<input name="symbol" value="BTC-PERP" required></label>
+      <label>Цель оборота, USDC<input name="target" type="number" min="100000" max="500000" value="100000" required></label>
+    </div>
+    <div class="fields" id="range">
+      <label>Нижняя цена<input name="lower" type="number" min="0" step="any" required></label>
+      <label>Верхняя цена<input name="upper" type="number" min="0" step="any" required></label>
+      <label>Интервалы сетки<input name="levels" type="number" value="10" min="2" max="50" required></label>
+    </div>
+    <div class="fields">
+      <label>Номинал входа, USDC<input name="notional" type="number" min="0" step="any" value="1000" required></label>
+      <label>Макс. проскальзывание, %<input name="slippage" type="number" min="0.01" max="5" step="any" value="0.5" required></label>
+    </div>
+    <label id="continue-stress" class="checkbox" hidden><input name="continueStress" type="checkbox" disabled> Продолжать после цели до отказа API или ручной остановки</label>
+    <p id="hint">Сетка выставляет один вход за раз и закрывает его на следующем уровне.</p>
+    <button class="primary">Запустить в тестнете</button>
+  </form>
+</details>
+<p id="error" role="alert" hidden></p>
+</main>
+</body></html>

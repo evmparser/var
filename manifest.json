@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Omni Testnet Grid",
+  "version": "1.0.0",
+  "minimum_chrome_version": "137",
+  "permissions": [
+    "storage",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://api.omni.testnet.variational.io/*"
+  ],
+  "background": {
+    "service_worker": "worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "panel.html"
+  }
+}
